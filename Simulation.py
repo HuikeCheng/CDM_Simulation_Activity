@@ -30,36 +30,12 @@ def sample_country_city(country_city, countries, n=500):
                 cc_list.append(data)
                 x=1
 
-            
-        
-        
-
 
 sample_country_city(country_city, countries)
 
-# gender
-gender = np.random.randint(2, size=500)
-gender = np.where(gender == 1, "Male", "Female")
-
-gender = pd.DataFrame(gender, columns=["gender"])
-
 # name (First and Last)
-def gen_name(x):
-    if x == "Female":
-        return fake.name_female()
-    else: 
-        return fake.name_male()
-
-name = gender.apply(lambda x: gen_name(gender[x]))
-
-gender["name"] = name
-
-# sample_id (any reference of your choice) if in 8-digit barcode
-sample_ID = []
-for i in range(500):
-    sample_ID.append('000' + fake.ean(length=8))
-
-gender["sid"] = sample_ID
+name1 = fake.name_male()
+name2 = fake.name_female()
 
 # age
 age1 = np.random.choice(70,250)
@@ -81,9 +57,18 @@ bmi2 = normal(loc=26.5, scale=6, size=250)
 height1 = normal(loc=178.2, scale=6.35, size=250)
 height2 = normal(loc=164.4, scale=5.59, size=250)
 
+# sample_id (any reference of your choice) if in 8-digit barcode
+df_male = pd.DataFrame({'name': name1 ,'gender': gender1, 'age': age1, 'bmi': bmi1, 'height': height1})
+df_female = pd.DataFrame({'name': name2, 'gender': gender2, 'age': age2, 'bmi': bmi2, 'height': height2})
 
-df_male = pd.DataFrame({'gender': gender1, 'age': age1, 'bmi': bmi1, 'height': height1})
-df_female = pd.DataFrame({'gender': gender2, 'age': age2, 'bmi': bmi2, 'height': height2})
+df = df_male.append(df_female)
+
+sample_ID = []
+for i in range(500):
+    sample_ID.append('000' + fake.ean(length=8))
+
+df["sid"] = sample_ID
+
 
 # country
 
