@@ -87,7 +87,20 @@ name = mydata["gender"].apply(gen_name)
 mydata["name"] = name
 
 ######### age ############
+#age_sta = random.randint(2, 500)
 
+#age_arr = np.array(age_sta)
+#age_sta_df = pd.DataFrame(age_arr, columns = ["age_sta"])
+
+#mydata = pd.concat([mydata, age_sta_df], axis=1)
+
+#for i in mydata['country']:
+#    med_age = country_info['median age'][country_info['country'] == i]
+#    if 
+
+#name = mydata["gender"].apply(gen_name)
+
+#mydata["name"] = name
 
 
 age = np.random.choice(range(18,80),500)
@@ -96,9 +109,9 @@ mydata["age"] = age
 ########### bmi ###########
 def gen_bmi(x):
     if x == "Female":
-        return normal(loc=22.5, scale=5, size=1)
+        return float(normal(loc=22.5, scale=5, size=1))
     else: 
-        return normal(loc=26.5, scale=6, size=1)
+        return float(normal(loc=26.5, scale=6, size=1))
 
 bmi = mydata["gender"].apply(gen_bmi)
 
@@ -107,9 +120,9 @@ mydata["bmi"] = bmi
 ########## height ###########
 def gen_height(x):
     if x == "Female":
-        return normal(loc=164.4, scale=5.59, size=1)
+        return float(normal(loc=164.4, scale=5.59, size=1))
     else: 
-        return normal(loc=178.2, scale=6.35, size=1)
+        return float(normal(loc=178.2, scale=6.35, size=1))
 
 height = mydata["gender"].apply(gen_height)
 
