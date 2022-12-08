@@ -165,4 +165,4 @@ mydata["status"] = status
 mydata.head()
 
 ############# write to csv file #############
-mydata.to_csv('mydata.csv')
+mydata.to_csv('mydata.csv', index = False)
