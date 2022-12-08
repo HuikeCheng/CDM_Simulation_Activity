@@ -56,15 +56,24 @@ def sample_country_city(country_city, n=500):
 country_city_list = sample_country_city(country_city)
 
 cc_arr = np.array(country_city_list)
-cc_df = pd.DataFrame(cc_arr, columns = ["city", "country"])
+cc_df = pd.DataFrame(cc_arr, columns = ["country", "city"])
 
 mydata = pd.concat([mydata, cc_df], axis=1)
 
 ############# gender ##############
-gender = np.random.randint(2, size=500)
-gender = np.where(gender == 1, "Male", "Female")
+country_info = pd.read_csv('country_info.csv')
 
-mydata["gender"] = gender
+gender_list = []
+for i in mydata['country']:
+    prop_f = float(country_info['prop_f'].loc[country_info['country'] == i])
+    prop_m = float(country_info['prop_m'].loc[country_info['country'] == i])
+    gender = np.random.choice([0, 1], 1, p=[prop_f, prop_m])
+    gender_list.append(gender)
+
+gen_arr = np.array(gender_list)
+gen_df = pd.DataFrame(gen_arr, columns = ["gender"])
+
+mydata = pd.concat([mydata, gen_df], axis=1)
 
 ############ name (First and Last) ############
 def gen_name(x):
@@ -78,6 +87,9 @@ name = mydata["gender"].apply(gen_name)
 mydata["name"] = name
 
 ######### age ############
+
+
+
 age = np.random.choice(range(18,80),500)
 mydata["age"] = age
 
