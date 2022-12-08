@@ -80,7 +80,6 @@ mydata = pd.concat([mydata, gen_df], axis=1)
 
 mydata['gender'] = mydata['gender'].replace({0: 'Female', 1: 'Male'})
 
-
 ############ name (First and Last) ############
 def gen_name(x):
     if x == "Female":
@@ -108,45 +107,42 @@ age_df = pd.DataFrame(age_arr, columns = ["age"])
 
 mydata = pd.concat([mydata, age_df], axis=1)
 
-########### bmi ###########
-def gen_bmi(x):
-    if x == "Female":
-        return float(normal(loc=22.5, scale=5, size=1))
-    else: 
-        return float(normal(loc=26.5, scale=6, size=1))
+############ height
+height_list = []
+for a,b in zip(mydata['gender'], mydata['country']):
+    if a == 'Female':
+        mean_height = int(country_info['mean female height'][country_info['country'] == b])
+        height = float(normal(loc=mean_height, scale=10, size=1))
+    else:
+        mean_height = int(country_info['mean male height'][country_info['country'] == b])
+        height = float(normal(loc=mean_height, scale=10, size=1))
+    height_list.append(height)
 
-bmi = mydata["gender"].apply(gen_bmi)
+height_arr = np.array(height_list)
+height_df = pd.DataFrame(height_arr, columns = ["height"])
+
+mydata = pd.concat([mydata, height_df], axis=1)
+
+############ weight
+weight_list = []
+for a,b in zip(mydata['gender'], mydata['country']):
+    if a == 'Female':
+        mean_weight = int(country_info['mean female weight'][country_info['country'] == b])
+        weight = float(normal(loc=mean_weight, scale=5, size=1))
+    else:
+        mean_weight = int(country_info['mean male weight'][country_info['country'] == b])
+        weight = float(normal(loc=mean_weight, scale=5, size=1))
+    weight_list.append(weight)
+
+weight_arr = np.array(weight_list)
+weight_df = pd.DataFrame(weight_arr, columns = ["weight"])
+
+mydata = pd.concat([mydata, weight_df], axis=1)
+
+########### bmi ###########
+bmi = mydata['weight']/((mydata['height']/100)*mydata['height']/100)
 
 mydata["bmi"] = bmi
-
-########## height ###########
-def gen_height(x):
-    if x == "Female":
-        return float(normal(loc=164.4, scale=5.59, size=1))
-    else: 
-        return float(normal(loc=178.2, scale=6.35, size=1))
-
-height = mydata["gender"].apply(gen_height)
-
-mydata["height"] = height
-
-############ height
-#height_list = []
-#for i in mydata['country']:
-#    if mydata['gender'] == 
-#    age_sta = int(random.randint(0,2))
-#    med_age = int(country_info['median age'][country_info['country'] == i])
-#    if age_sta == 0:
-#        age = random.sample(range(18, med_age), 1)
-#    else:
-#        age = random.sample(range(med_age, 65), 1)
-#    age_list.append(age)
-
-#age_arr = np.array(age_list)
-#age_df = pd.DataFrame(age_arr, columns = ["age"])
-
-#mydata = pd.concat([mydata, age_df], axis=1)
-
 
 ######## 5 SNP values (0,1,2) ##########
 # rs2231142: MAF=0.10

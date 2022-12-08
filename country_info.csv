@@ -1,7 +1,7 @@
-country,mean male height,mean female height,median age,perc female,prop_f,prop_m
-United Kingdom,175.1,161.6,40.6,50.659,0.50659,0.49341
-United States,175.3,161.3,38.5,50.504,0.50504,0.49496
-Australia,175.6,161.8,37.5,50.183,0.50183,0.49817
-Japan,171.8,158.6,48.6,51.166,0.51166,0.48834
-South Africa,168,159,28,50.992,0.50992,0.49008
-Argentina,174.5,161,32.4,51.056,0.51056,0.48944
+country,mean male height,mean female height,median age,perc female,prop_f,prop_m,mean male weight,mean female weight
+United Kingdom,175.1,161.6,40.6,50.659,0.50659,0.49341,85,70
+United States,175.3,161.3,38.5,50.504,0.50504,0.49496,90.6,77.5
+Australia,175.6,161.8,37.5,50.183,0.50183,0.49817,87,71.8
+Japan,171.8,158.6,48.6,51.166,0.51166,0.48834,69.5,54.8
+South Africa,168,159,28,50.992,0.50992,0.49008,71.9,74.1
+Argentina,174.5,161,32.4,51.056,0.51056,0.48944,84.7,71.4
