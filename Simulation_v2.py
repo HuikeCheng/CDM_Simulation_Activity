@@ -23,7 +23,10 @@ mydata = pd.DataFrame(sample_ID, columns=['sid'])
 els = ['Primary', 'Secondary', 'Bachelor', 'Masters', 'PhD']
 el = np.random.choice(els, 500, p = [0.1, 0.3, 0.3, 0.2, 0.1])
 # add to dataset
-mydata = pd.concat([mydata, el], axis=1)
+el_arr = np.array(el)
+el_df = pd.DataFrame(el_arr, columns = ["education_level"])
+
+mydata = pd.concat([mydata, el_df], axis=1)
 
 ############ 10 gene_expression values ranging from ###########
 a = [
@@ -75,6 +78,9 @@ gen_df = pd.DataFrame(gen_arr, columns = ["gender"])
 
 mydata = pd.concat([mydata, gen_df], axis=1)
 
+mydata['gender'] = mydata['gender'].replace({0: 'Female', 1: 'Male'})
+
+
 ############ name (First and Last) ############
 def gen_name(x):
     if x == "Female":
@@ -124,7 +130,22 @@ height = mydata["gender"].apply(gen_height)
 
 mydata["height"] = height
 
+############ height
+#height_list = []
+#for i in mydata['country']:
+#    if mydata['gender'] == 
+#    age_sta = int(random.randint(0,2))
+#    med_age = int(country_info['median age'][country_info['country'] == i])
+#    if age_sta == 0:
+#        age = random.sample(range(18, med_age), 1)
+#    else:
+#        age = random.sample(range(med_age, 65), 1)
+#    age_list.append(age)
 
+#age_arr = np.array(age_list)
+#age_df = pd.DataFrame(age_arr, columns = ["age"])
+
+#mydata = pd.concat([mydata, age_df], axis=1)
 
 
 ######## 5 SNP values (0,1,2) ##########
