@@ -23,7 +23,7 @@ mydata = pd.DataFrame(sample_ID, columns=['sid'])
 els = ['Primary', 'Secondary', 'Bachelor', 'Masters', 'PhD']
 el = np.random.choice(els, 500, p = [0.1, 0.3, 0.3, 0.2, 0.1])
 # add to dataset
-mydata = pd.DataFrame(el, columns=['education_level'])
+mydata = pd.concat([mydata, el], axis=1)
 
 ############ 10 gene_expression values ranging from ###########
 a = [
@@ -87,24 +87,20 @@ name = mydata["gender"].apply(gen_name)
 mydata["name"] = name
 
 ######### age ############
-#age_sta = random.randint(2, 500)
+age_list = []
+for i in mydata['country']:
+    age_sta = int(random.randint(0,2))
+    med_age = int(country_info['median age'][country_info['country'] == i])
+    if age_sta == 0:
+        age = random.sample(range(18, med_age), 1)
+    else:
+        age = random.sample(range(med_age, 65), 1)
+    age_list.append(age)
 
-#age_arr = np.array(age_sta)
-#age_sta_df = pd.DataFrame(age_arr, columns = ["age_sta"])
+age_arr = np.array(age_list)
+age_df = pd.DataFrame(age_arr, columns = ["age"])
 
-#mydata = pd.concat([mydata, age_sta_df], axis=1)
-
-#for i in mydata['country']:
-#    med_age = country_info['median age'][country_info['country'] == i]
-#    if 
-
-#name = mydata["gender"].apply(gen_name)
-
-#mydata["name"] = name
-
-
-age = np.random.choice(range(18,80),500)
-mydata["age"] = age
+mydata = pd.concat([mydata, age_df], axis=1)
 
 ########### bmi ###########
 def gen_bmi(x):
